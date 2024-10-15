@@ -25,9 +25,9 @@
 
 
 use std::error;
-use std::error::Error;
 use std::fmt;
 use std::num::ParseIntError;
+use std::error::Error;
 
 // TODO: update the return type of `main()` to make this compile.
 fn main() -> Result<(), Box<dyn Error>> {

@@ -19,10 +19,16 @@
 
 
 pub struct ReportCard<T> {
-    //pub grade: f32,
     pub grade: T,
     pub student_name: String,
     pub student_age: u8,
+}
+
+impl ReportCard<&str> {
+    pub fn print(&self) -> String {
+        format!("{} ({}) - achieved a grade of {}",
+            &self.student_name, &self.student_age, &self.grade)
+    }
 }
 
 impl ReportCard<f32> {
@@ -31,12 +37,7 @@ impl ReportCard<f32> {
             &self.student_name, &self.student_age, &self.grade)
     }
 }
-impl ReportCard<&str> {
-    pub fn print(&self) -> String {
-        format!("{} ({}) - achieved a grade of {}",
-            &self.student_name, &self.student_age, &self.grade)
-    }
-}
+
 
 #[cfg(test)]
 mod tests {

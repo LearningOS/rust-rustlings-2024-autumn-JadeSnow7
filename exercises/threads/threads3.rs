@@ -26,35 +26,36 @@ impl Queue {
     }
 }
 
-fn send_tx(q: Queue, tx: mpsc::Sender<u32>) -> () {
-    let tx1 = tx.clone();
-    let qc = Arc::new(q);
-    let qc1 = Arc::clone(&qc);
-    let qc2 = Arc::clone(&qc);
-
+fn send_tx(q: Arc<Queue>, tx: mpsc::Sender<u32>) -> () {
+    let tx1 = mpsc::Sender::clone(&tx);
+    let q1 = Arc::clone(&q); 
     let handle1 = thread::spawn(move || {
-        for val in &qc1.first_half {
+        for val in &q1.first_half {
             println!("sending {:?}", val);
             tx.send(*val).unwrap();
             thread::sleep(Duration::from_secs(1));
         }
     });
-
-    let handle2= thread::spawn(move || {
-        for val in &qc2.second_half {
+    let q2 = Arc::clone(&q);
+    let handle2 = thread::spawn(move || {
+        for val in &q2.second_half {
             println!("sending {:?}", val);
             tx1.send(*val).unwrap();
             thread::sleep(Duration::from_secs(1));
         }
     });
+
+    handle1.join().unwrap();
+    handle2.join().unwrap();
 }
 
 fn main() {
     let (tx, rx) = mpsc::channel();
     let queue = Queue::new();
     let queue_length = queue.length;
+    let arc_queue = Arc::new(queue);
 
-    send_tx(queue, tx);
+    send_tx(arc_queue, tx);
 
     let mut total_received: u32 = 0;
     for received in rx {

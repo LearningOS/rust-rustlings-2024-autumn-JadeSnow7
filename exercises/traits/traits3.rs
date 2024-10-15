@@ -23,13 +23,13 @@ struct OtherSoftware {
 }
 
 impl Licensed for SomeSoftware {
-    fn licensing_info(&self) -> String {
-        format!("Some information")
+    fn licensing_info(&self) -> String{
+        "Some information".to_string()
     }
 } // Don't edit this line
 impl Licensed for OtherSoftware {
-    fn licensing_info(&self) -> String {
-        format!("Some information")
+    fn licensing_info(&self) -> String{
+        "Some information".to_string()
     }
 } // Don't edit this line
 

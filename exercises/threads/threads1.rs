@@ -10,7 +10,7 @@
 
 
 
-use std::{result, thread};
+use std::thread;
 use std::time::{Duration, Instant};
 
 fn main() {
@@ -27,7 +27,7 @@ fn main() {
     let mut results: Vec<u128> = vec![];
     for handle in handles {
         // TODO: a struct is returned from thread::spawn, can you use it?
-        let result =handle.join().expect("thread failed");
+        let result = handle.join().expect("threads failed");
         results.push(result);
     }
 

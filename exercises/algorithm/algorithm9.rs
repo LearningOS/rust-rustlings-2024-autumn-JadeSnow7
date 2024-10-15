@@ -80,7 +80,7 @@ where
         } else if left_idx <= self.count {
             left_idx
         } else {
-            idx 
+            idx  // 当没有子节点时，返回自身的索引（不过通常不会用到）
         }
     }
 }
@@ -112,15 +112,18 @@ where
             return None;
         }
 
+        // 弹出堆顶元素，这是最小或最大元素
         let result = self.items.swap_remove(1);
         self.count -= 1;
 
         if self.count > 0 {
+            // 从数组末尾取出最后一个元素，并将其重新插入到堆的顶部
             let last_item = self.items.pop().unwrap();
             if !self.items.is_empty() {
                 self.items.insert(1, last_item);
             }
 
+            // 重新调整堆
             let mut idx = 1;
             while self.children_present(idx) {
                 let swap_idx = self.smallest_child_idx(idx);

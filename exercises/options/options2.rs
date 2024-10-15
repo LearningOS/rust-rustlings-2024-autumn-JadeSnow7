@@ -13,9 +13,9 @@ mod tests {
         let optional_target = Some(target);
 
         // TODO: Make this an if let statement whose value is "Some" type
-        if let  Some(word) = optional_target {
-            assert_eq!(word, target);
-        }
+        if let Some(word) = optional_target {
+            assert_eq!(word, target)
+        };
     }
 
     #[test]
@@ -35,8 +35,7 @@ mod tests {
         while let Some(Some(integer)) = optional_integers.pop() {
             assert_eq!(integer, cursor);
             cursor -= 1;
-        }
-        
+        };
 
         assert_eq!(cursor, 0);
     }

@@ -33,12 +33,11 @@ impl<T> Stack<T> {
 	fn pop(&mut self) -> Option<T> {
 		// TODO
 		if self.size > 0 {
-			self.size -= 1;
-			self.data.pop()
-		} else {
-			None
-		}
-		
+            self.size -= 1;
+            self.data.pop()
+        } else {
+            None
+        }
 	}
 	fn peek(&self) -> Option<&T> {
 		if 0 == self.size {

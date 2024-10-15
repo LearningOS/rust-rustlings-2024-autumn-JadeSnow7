@@ -55,7 +55,6 @@ fn list_of_results() -> Vec<Result<i32, DivisionError>> {
     division_results.collect()
 }
 
-
 #[cfg(test)]
 mod tests {
     use super::*;
